@@ -6,7 +6,7 @@
 #pragma config WDTE = OFF        // WDT operating mode (WDT enabled regardless of sleep)
 
 #include <xc.h>
-#include "LEDarray.h"
+//#include "LEDarray.h"
 #include "interrupts.h"
 #include "comparator.h"
 
@@ -15,8 +15,11 @@
 
 void main(void) {
 	//call your initialisation functions to set up the hardware modules
-
+    Interrupts_init();
+    Comp1_init();
+    TRISDbits.TRISD7=0; // This sets the pin to be an output
     while (1) {
-		
+        
+		Sleep();
     }
 }
