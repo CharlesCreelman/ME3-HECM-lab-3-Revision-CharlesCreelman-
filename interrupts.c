@@ -12,7 +12,8 @@ void Interrupts_init(void)
     PIE2bits.C1IE=1;    // enables comparator interrupt
     INTCONbits.GIE=1; 	//turn on interrupts globally (when this is off, all interrupts are deactivated)
     INTCONbits.IPEN=1;  //enables interrupt priority feature
-    
+    PIE0bits.TMR0IE =1; //enable the timer interrupt
+    IPR0bits.TMR0IP=1;
     // turn on global interrupts, peripheral interrupts and the interrupt source 
 	// It's a good idea to turn on global interrupts last, once all other interrupt configuration is done.
 }
@@ -30,5 +31,13 @@ void __interrupt(high_priority) HighISR()
     LATDbits.LATD7 = 0;
     }	
     //add your ISR code here i.e. check the flag, do something (i.e. toggle an LED), clear the flag...
+    if(PIR0bits.TMR0IF){
+        LATHbits.LATH3 = !LATHbits.LATH3;//changes the value of the right LED
+        PIR0bits.TMR0IF=0; //Resets the flag
+    }
+    
+    //HOW DO I GET THE INTERRUPT TO WORK ABOVE
 }
+
+
 
