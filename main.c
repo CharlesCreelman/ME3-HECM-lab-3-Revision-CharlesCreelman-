@@ -15,8 +15,13 @@
 
 void main(void) {
 	//call your initialisation functions to set up the hardware modules
-
+    Comp1_init(); //initialises the comparator
+    Interrupts_init();
+    //LEDarray_init();
+    TRISDbits.TRISD7 = 0;//Sets the pin to be an output pin
+    LATDbits.LATD7 = 1; //Sets the initial output
     while (1) {
-		
-    }
+		Sleep();
+            
+        }
 }
